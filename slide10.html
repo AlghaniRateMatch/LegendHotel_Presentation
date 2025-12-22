@@ -1,0 +1,288 @@
+<!-- SLIDE 10 — Zero-effort implementation & risk control
+     Save as: slide10.html
+-->
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Legend Hotels & Resorts x RateMatch — Slide 10</title>
+
+<style>
+:root{
+  --bg1:#f7f9ff; --bg2:#f3f6ff; --text:#0f172a; --muted:#5b667a;
+  --border:#e5eaf3; --line:#e6ecf6; --shadow:0 18px 50px rgba(15,23,42,.10);
+  --good:#16a34a; --warn:#f59e0b;
+}
+*{box-sizing:border-box;font-family:system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif}
+body{
+  margin:0; min-height:100vh; color:var(--text);
+  background:
+    radial-gradient(900px 500px at 12% 10%, rgba(18,191,167,.20) 0%, rgba(18,191,167,0) 55%),
+    radial-gradient(900px 500px at 88% 12%, rgba(11,92,255,.14) 0%, rgba(11,92,255,0) 58%),
+    linear-gradient(180deg, var(--bg1) 0%, var(--bg2) 45%, #f5f7fb 100%);
+}
+
+.container{
+  width:min(1120px, calc(100% - 44px));
+  margin:0 auto; padding:18px 0;
+  min-height:100vh; display:flex; flex-direction:column; gap:14px;
+}
+
+/* header */
+.brand{
+  display:flex; align-items:center; justify-content:center; gap:16px;
+  padding:12px 18px; border-radius:999px;
+  background:rgba(255,255,255,.86); border:1px solid var(--border);
+  box-shadow:0 10px 30px rgba(15,23,42,.08);
+}
+.brand img.logo{height:44px}
+.brand img.logo.legend{height:52px}
+.brand img.plus{height:20px;opacity:.9}
+@media(max-width:720px){
+  .brand img.logo{height:34px}
+  .brand img.logo.legend{height:40px}
+}
+
+/* title */
+.titleRow{
+  display:flex; align-items:flex-end; justify-content:space-between; gap:12px;
+}
+.titleRow h1{margin:0;font-size:28px;line-height:1.15}
+.titleRow .subtitle{color:var(--muted);font-size:13px;max-width:96ch;text-align:right}
+
+/* layout */
+.grid{
+  display:grid; grid-template-columns:1fr 1fr; gap:14px; flex:1;
+}
+.panel{
+  background:rgba(255,255,255,.88);
+  border:1px solid var(--border);
+  border-radius:24px;
+  box-shadow:var(--shadow);
+  padding:16px;
+}
+.card{
+  background:#fff;
+  border:1px solid var(--border);
+  border-radius:18px;
+  padding:16px;
+}
+.card h3{
+  margin:0 0 8px;
+  font-size:12px;
+  letter-spacing:.12em;
+  text-transform:uppercase;
+  color:#6a768c;
+}
+.card p{margin:0;font-size:14px;line-height:1.6}
+
+/* blocks */
+.blocks{display:grid; gap:12px; margin-top:14px}
+.block{
+  border:1px solid var(--line);
+  border-radius:18px;
+  padding:14px;
+  background:linear-gradient(180deg,#ffffff 0%, #fbfcff 100%);
+  display:grid;
+  grid-template-columns:48px 1fr;
+  gap:14px;
+}
+.icon{
+  width:48px;height:48px;border-radius:16px;
+  display:flex;align-items:center;justify-content:center;
+  font-weight:1000;color:#0b1224;
+  background:linear-gradient(135deg, rgba(22,163,74,.18), rgba(11,92,255,.12));
+  border:1px solid rgba(15,23,42,.08);
+}
+.block b{display:block;margin-bottom:4px}
+.block span{display:block;color:#5b667a;font-size:13px;line-height:1.45}
+
+/* table */
+.table{
+  margin-top:14px;
+  border:1px solid var(--line);
+  border-radius:18px;
+  overflow:hidden;
+}
+.r{
+  display:grid;
+  grid-template-columns: 1.05fr .95fr;
+}
+.c{
+  padding:12px;
+  font-size:13px;
+  line-height:1.4;
+  border-bottom:1px solid var(--line);
+  border-right:1px solid var(--line);
+}
+.r .c:last-child{border-right:none}
+.r:last-child .c{border-bottom:none}
+.head .c{
+  background:#fbfcff;
+  font-weight:1000;
+  font-size:11px;
+  letter-spacing:.08em;
+  text-transform:uppercase;
+}
+.small{color:#5b667a}
+
+.note{
+  margin-top:14px;
+  padding:14px;
+  border-radius:18px;
+  border:1px dashed rgba(15,23,42,.18);
+  background:rgba(255,255,255,.72);
+  font-size:13px;
+  line-height:1.6;
+}
+.note b{font-weight:1000}
+
+/* nav */
+.nav{
+  background:#fff; border:1px solid var(--line); border-radius:22px;
+  padding:14px 16px; display:flex; justify-content:space-between; align-items:center;
+}
+.btn{
+  background:linear-gradient(90deg,#167a5a,#1dbf73);
+  color:#fff; padding:12px 16px; border-radius:999px;
+  font-weight:900; text-decoration:none;
+}
+.btn.secondary{background:#fff;color:#0f172a;border:1px solid var(--line)}
+
+@media(max-width:980px){
+  .grid{grid-template-columns:1fr}
+  .titleRow{flex-direction:column;align-items:flex-start}
+  .titleRow .subtitle{text-align:left}
+  .r{grid-template-columns:1fr}
+  .head{display:none}
+  .c{border-right:none}
+}
+@media(max-width:720px){
+  .nav{flex-direction:column;gap:10px}
+  .btn{width:100%;text-align:center}
+  .titleRow h1{font-size:22px}
+}
+</style>
+</head>
+
+<body>
+<div class="container">
+
+  <!-- header -->
+  <div class="brand">
+    <img class="logo" src="img/AGRM Logo - PNG.png" alt="RateMatch">
+    <img class="plus" src="img/plus.png" alt="+">
+    <img class="logo legend" src="img/legendHotel_Logo-removebg-preview.png" alt="Legend Hotels & Resorts">
+  </div>
+
+  <!-- title -->
+  <div class="titleRow">
+    <h1>Zero-effort implementation</h1>
+    <div class="subtitle">
+      If Legend already manages Booking.com or Agoda, RateMatch can automatically
+      configure the website and booking flow — without asking your team for data.
+    </div>
+  </div>
+
+  <div class="grid">
+    <!-- LEFT -->
+    <div class="panel">
+      <div class="card">
+        <h3>How setup actually works</h3>
+        <p>
+          RateMatch intelligently mirrors what is already live on OTAs,
+          eliminating duplicate work and long setup cycles.
+        </p>
+
+        <div class="blocks">
+          <div class="block">
+            <div class="icon">↺</div>
+            <div>
+              <b>Automatic OTA sync</b>
+              <span>Room details, pricing logic, policies, and availability are inferred directly from Booking.com / Agoda.</span>
+            </div>
+          </div>
+
+          <div class="block">
+            <div class="icon">⚡</div>
+            <div>
+              <b>No manual data entry</b>
+              <span>No spreadsheets, no rate sheets, no content preparation required from the hotel.</span>
+            </div>
+          </div>
+
+          <div class="block">
+            <div class="icon">✓</div>
+            <div>
+              <b>Quick verification only</b>
+              <span>Legend simply reviews the live setup and confirms accuracy before launch.</span>
+            </div>
+          </div>
+
+          <div class="block">
+            <div class="icon">⏱</div>
+            <div>
+              <b>Go-live within 24 hours</b>
+              <span>Because the data already exists, implementation is fast and low-risk.</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="note">
+          <b>Key advantage:</b> RateMatch does not change how you currently manage OTAs —
+          it leverages them to strengthen your direct channel.
+        </div>
+      </div>
+    </div>
+
+    <!-- RIGHT -->
+    <div class="panel">
+      <div class="card">
+        <h3>Risk control (designed in)</h3>
+        <p>Automation doesn’t mean loss of control — risks are monitored continuously.</p>
+
+        <div class="table">
+          <div class="r head">
+            <div class="c">Risk</div>
+            <div class="c">How RateMatch handles it</div>
+          </div>
+
+          <div class="r">
+            <div class="c"><b>Rate inconsistency</b><div class="small">OTA vs website mismatch</div></div>
+            <div class="c"><b>PriceMatch + monitoring</b><div class="small">Parity issues are detected and surfaced immediately.</div></div>
+          </div>
+
+          <div class="r">
+            <div class="c"><b>Incorrect content</b><div class="small">Room details or policies</div></div>
+            <div class="c"><b>Source-of-truth logic</b><div class="small">OTAs act as the canonical data source.</div></div>
+          </div>
+
+          <div class="r">
+            <div class="c"><b>Operational disruption</b><div class="small">Front desk confusion</div></div>
+            <div class="c"><b>No workflow change</b><div class="small">Walk-ins and manual bookings continue as usual.</div></div>
+          </div>
+
+          <div class="r">
+            <div class="c"><b>Checkout drop-off</b><div class="small">Payment hesitation</div></div>
+            <div class="c"><b>Multiple payment options</b><div class="small">Stripe, PayPal, Ottu + local gateways.</div></div>
+          </div>
+        </div>
+
+        <div class="note">
+          <b>Bottom line:</b> The easiest system to adopt is the one that doesn’t ask your team to do extra work.
+          That’s the philosophy behind RateMatch.
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- nav -->
+  <div class="nav">
+    <a class="btn secondary" href="slide9.html">← Previous</a>
+    <strong style="color:#64748b">Slide 10 / 12</strong>
+    <a class="btn" href="slide11.html">Next →</a>
+  </div>
+</div>
+</body>
+</html>

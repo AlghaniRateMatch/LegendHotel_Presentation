@@ -1,0 +1,376 @@
+<!-- SLIDE 1 — Cover / Title (Gradient background, no background image)
+     Save as: index.html
+
+     Put these in /img:
+     - img/AGRM Logo - PNG.png     (RateMatch logo you just shared)
+     - img/plus.png               (plus icon you just shared)
+     - img/legendHotel_Logo-removebg-preview.png (Legend logo)
+-->
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Legend Hotels & Resorts x RateMatch — Proposal</title>
+  <style>
+    :root{
+      --bg1:#f7f9ff;
+      --bg2:#f3f6ff;
+      --card:#ffffff;
+      --text:#0f172a;
+      --muted:#5b667a;
+      --border:#e5eaf3;
+      --accent:#12bfa7;
+      --accent2:#0b5cff;
+      --shadow:0 18px 50px rgba(15,23,42,.10);
+      --radius:22px;
+      --pill:999px;
+      --line:#e6ecf6;
+    }
+    *{box-sizing:border-box;font-family:system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif}
+    body{
+      margin:0;
+      min-height:100vh;
+      color:var(--text);
+      overflow:auto;
+      background:
+        radial-gradient(900px 500px at 12% 10%, rgba(18,191,167,.20) 0%, rgba(18,191,167,0) 55%),
+        radial-gradient(900px 500px at 88% 12%, rgba(11,92,255,.14) 0%, rgba(11,92,255,0) 58%),
+        linear-gradient(180deg, var(--bg1) 0%, var(--bg2) 45%, #f5f7fb 100%);
+    }
+    img{max-width:100%; height:auto; display:block;}
+
+    .slide{
+      width:100%;
+      min-height:100vh;
+      display:flex;
+      justify-content:center;
+      align-items:stretch;
+      padding:0;
+    }
+
+    .container{
+      width:min(1120px, calc(100% - 44px));
+      margin:0 auto;
+      padding:18px 0 18px;
+      display:flex;
+      flex-direction:column;
+      min-height:100vh;
+    }
+
+    /* top logo pill */
+    .topbar{
+      display:flex;
+      justify-content:center;
+      padding-top:10px;
+    }
+      .brand{
+    width:100%;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    gap:16px;
+    padding:12px 18px;
+    border-radius:999px;
+    background:rgba(255,255,255,.86);
+    border:1px solid #e5eaf3;
+    box-shadow:0 10px 30px rgba(15,23,42,.08);
+    backdrop-filter: blur(10px);
+  }
+  .brand img.logo{height:44px;width:auto}          /* RateMatch default */
+  .brand img.logo.legend{height:52px;width:auto}   /* Legend slightly larger */
+  .brand img.plus{height:20px;width:auto;opacity:.92}
+
+  @media (max-width: 720px){
+    .brand img.logo{height:34px;}
+    .brand img.logo.legend{height:40px;}           /* still a bit larger on mobile */
+    .brand img.plus{height:18px;}
+  }
+
+    /* main content grid */
+    .content{
+      margin:22px auto 0;
+      display:grid;
+      grid-template-columns: 1.15fr .85fr;
+      gap:16px;
+      align-items:stretch;
+      flex:1;
+      padding-bottom:22px;
+    }
+    .panel{
+      background:rgba(255,255,255,.88);
+      border:1px solid var(--border);
+      border-radius:24px;
+      box-shadow:var(--shadow);
+      backdrop-filter: blur(10px);
+    }
+    .left{
+      padding:28px 28px 24px;
+      display:flex;
+      flex-direction:column;
+      gap:16px;
+      justify-content:space-between;
+    }
+    .kicker{
+      display:inline-flex;
+      align-items:center;
+      gap:10px;
+      padding:8px 12px;
+      border-radius:var(--pill);
+      background:#f2fbf9;
+      border:1px solid rgba(18,191,167,.25);
+      width:fit-content;
+      font-size:12px;
+      letter-spacing:.12em;
+      text-transform:uppercase;
+      color:#246b60;
+      font-weight:800;
+    }
+    h1{
+      margin:10px 0 6px;
+      font-size:40px;
+      line-height:1.08;
+      letter-spacing:.01em;
+      color:#0b1224;
+    }
+    .sub{
+      margin:0;
+      color:var(--muted);
+      font-size:15px;
+      line-height:1.6;
+      max-width:62ch;
+    }
+    .bullets{
+      margin:14px 0 0;
+      padding:0;
+      list-style:none;
+      display:grid;
+      gap:10px;
+    }
+    .bullets li{
+      display:flex;
+      gap:10px;
+      align-items:flex-start;
+      font-size:14px;
+      line-height:1.5;
+      color:#0f172a;
+    }
+    .check{
+      width:18px;height:18px;flex:0 0 18px;margin-top:2px;
+      border-radius:6px;
+      background:linear-gradient(135deg, var(--accent), #45e7d2);
+      box-shadow:0 10px 22px rgba(18,191,167,.22);
+      position:relative;
+    }
+    .check:after{
+      content:"";
+      position:absolute;
+      left:5px; top:4px;
+      width:7px; height:4px;
+      border-left:2px solid #04312b;
+      border-bottom:2px solid #04312b;
+      transform:rotate(-45deg);
+      opacity:.95;
+    }
+    .badge-row{
+      display:flex;
+      gap:10px;
+      flex-wrap:wrap;
+      margin-top:10px;
+    }
+    .pill{
+      display:inline-flex;
+      align-items:center;
+      gap:8px;
+      padding:8px 12px;
+      border-radius:var(--pill);
+      border:1px solid var(--border);
+      background:#ffffff;
+      color:#42506a;
+      font-size:12px;
+      letter-spacing:.08em;
+      text-transform:uppercase;
+      font-weight:800;
+    }
+    .pill .mini-dot{width:8px;height:8px;border-radius:50%;background:var(--accent2);}
+
+    .right{
+      padding:16px;
+      display:flex;
+      flex-direction:column;
+      gap:12px;
+    }
+    .card{
+      border-radius:18px;
+      background:#ffffff;
+      border:1px solid var(--border);
+      padding:14px;
+    }
+    .card h3{
+      margin:0 0 6px;
+      font-size:12px;
+      letter-spacing:.12em;
+      text-transform:uppercase;
+      color:#6a768c;
+    }
+    .card p{
+      margin:0;
+      font-size:14px;
+      line-height:1.55;
+      color:#111a33;
+    }
+    .meta{
+      margin-top:10px;
+      padding-top:10px;
+      border-top:1px dashed rgba(15,23,42,.12);
+      display:grid;
+      gap:6px;
+      font-size:13px;
+      color:#334155;
+    }
+    .meta b{color:#0f172a;}
+    .meta a{
+      color:#0f6b62;
+      text-decoration:none;
+      border-bottom:1px dashed rgba(15,107,98,.45);
+      padding-bottom:1px;
+      word-break:break-all;
+      font-weight:800;
+    }
+
+    /* footer nav */
+    .nav{
+      background:#fff;
+      border:1px solid var(--line);
+      border-radius:22px;
+      padding:14px 16px;
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      gap:10px;
+    }
+    .btn{
+      appearance:none;
+      border:0;
+      background:linear-gradient(90deg, #167a5a, #1dbf73);
+      color:#fff;
+      padding:12px 16px;
+      border-radius:999px;
+      font-weight:900;
+      cursor:pointer;
+      text-decoration:none;
+      display:inline-flex;
+      align-items:center;
+      gap:8px;
+      white-space:nowrap;
+      box-shadow:0 12px 26px rgba(16,185,129,.25);
+    }
+    .btn:hover{filter:brightness(1.03);}
+
+    /* responsive */
+    @media (max-width: 920px){
+      .content{grid-template-columns:1fr;}
+      h1{font-size:34px;}
+      .brand img.logo{height:38px;}
+    }
+    @media (max-width: 820px){
+      .container{width:min(1120px, calc(100% - 28px));}
+      h1{font-size:28px; line-height:1.15;}
+      .sub{font-size:14px;}
+      .left{padding:18px;}
+      .right{padding:14px;}
+      .nav{flex-direction:column; align-items:stretch; gap:10px;}
+      .nav .btn{width:100%; justify-content:center;}
+      .brand{border-radius:18px; gap:12px;}
+      .brand img.logo{height:32px;}
+      .brand img.plus{height:20px;}
+    }
+    @media (max-width: 420px){
+      h1{font-size:24px;}
+      .kicker{font-size:11px;}
+    }
+  </style>
+</head>
+
+<body>
+  <section class="slide" aria-label="Proposal cover slide">
+    <div class="container">
+      <!-- Top logos -->
+      <div class="topbar">
+        <div class="brand">
+  <img class="logo" src="img/AGRM Logo - PNG.png" alt="RateMatch" />
+  <img class="plus" src="img/plus.png" alt="+" />
+  <img class="logo legend" src="img/legendHotel_Logo-removebg-preview.png" alt="Legend Hotels & Resorts" />
+</div>
+      </div>
+
+      <!-- Main content -->
+      <div class="content">
+        <div class="panel left">
+          <div>
+            <div class="kicker">Direct Booking & Website Assessment</div>
+
+            <h1>Legend Hotels & Resorts<br/>Direct Booking Proposal</h1>
+
+            <p class="sub">
+              Convert the current group website → property page → booking subdomain journey into a faster,
+              clearer path to a confirmed booking — while keeping your existing brand site intact.
+              RateMatch focuses on reducing friction, improving trust signals, and enabling a modern
+              mobile-first booking experience.
+            </p>
+
+            <ul class="bullets">
+              <li><span class="check"></span><span><b>Fewer steps to book:</b> reduce drop-offs caused by redirects and unclear next actions.</span></li>
+              <li><span class="check"></span><span><b>Mobile-first booking:</b> cleaner date selection, room selection, and checkout flow on phones.</span></li>
+              <li><span class="check"></span><span><b>Parity & confidence:</b> price-check tools to compete with Booking.com / Agoda perception.</span></li>
+              <li><span class="check"></span><span><b>Commercial model:</b> no setup fee, no subscription — <b>12% on confirmed bookings only</b>.</span></li>
+            </ul>
+
+            <div class="badge-row">
+              <span class="pill"><span class="mini-dot"></span> Focus: Islamabad journey</span>
+              <span class="pill"><span class="mini-dot" style="background:var(--accent)"></span> Output: 12-slide proposal deck</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="panel right">
+          <div class="card">
+            <h3>Client-facing assessment</h3>
+            <p>
+              This deck summarizes booking friction points and shows a cleaner RateMatch-led guest journey
+              (calendar → rooms → checkout), optimized for conversion and international guests.
+            </p>
+            <div class="meta">
+              <div><b>Website:</b> <a href="https://legendhotels.com.pk/" target="_blank" rel="noopener">legendhotels.com.pk</a></div>
+              <div><b>Property:</b> Legend Hotel Islamabad (G-5/2, Islamabad)</div>
+              <div><b>Key theme:</b> fewer steps, clearer CTAs, mobile trust</div>
+            </div>
+          </div>
+
+          <div class="card">
+            <h3>What stays the same</h3>
+            <p>
+              Your existing website and branding remain primary. RateMatch plugs into the booking path
+              to remove friction and add conversion tools.
+            </p>
+          </div>
+
+          <div class="card">
+            <h3>What we’ll decide on the call</h3>
+            <p>
+              Which properties to include, required access (website/calendar/booking), and pilot timeline.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Navigation -->
+      <div class="nav">
+        <span style="opacity:.35">&nbsp;</span>
+        <div style="font-weight:900;color:#64748b;">Slide 1 / 12</div>
+        <a href="slide2.html" class="btn">Next →</a>
+      </div>
+    </div>
+  </section>
+</body>
+</html>

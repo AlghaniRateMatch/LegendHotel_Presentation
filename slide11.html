@@ -1,0 +1,439 @@
+<!-- SLIDE 11 — Phased rollout approach (UPDATED: Step 4 includes thumbnail + modal zoom)
+     Save as: slide11.html
+
+     Put these in /img:
+     - AGRM Logo - PNG.png
+     - plus.png
+     - legendHotel_Logo-removebg-preview.png
+     - RateMatch_Calendar.png
+-->
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Legend Hotels & Resorts x RateMatch — Slide 11</title>
+
+<style>
+:root{
+  --bg1:#f7f9ff; --bg2:#f3f6ff; --text:#0f172a; --muted:#5b667a;
+  --border:#e5eaf3; --line:#e6ecf6; --shadow:0 18px 50px rgba(15,23,42,.10);
+  --good:#16a34a; --warn:#f59e0b;
+}
+*{box-sizing:border-box;font-family:system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif}
+body{
+  margin:0; min-height:100vh; color:var(--text);
+  background:
+    radial-gradient(900px 500px at 12% 10%, rgba(18,191,167,.20) 0%, rgba(18,191,167,0) 55%),
+    radial-gradient(900px 500px at 88% 12%, rgba(11,92,255,.14) 0%, rgba(11,92,255,0) 58%),
+    linear-gradient(180deg, var(--bg1) 0%, var(--bg2) 45%, #f5f7fb 100%);
+}
+
+.container{
+  width:min(1120px, calc(100% - 44px));
+  margin:0 auto; padding:18px 0;
+  min-height:100vh; display:flex; flex-direction:column; gap:14px;
+}
+
+/* header */
+.brand{
+  display:flex; align-items:center; justify-content:center; gap:16px;
+  padding:12px 18px; border-radius:999px;
+  background:rgba(255,255,255,.86); border:1px solid var(--border);
+  box-shadow:0 10px 30px rgba(15,23,42,.08);
+}
+.brand img.logo{height:44px}
+.brand img.logo.legend{height:52px}
+.brand img.plus{height:20px;opacity:.9}
+@media(max-width:720px){
+  .brand img.logo{height:34px}
+  .brand img.logo.legend{height:40px}
+}
+
+/* title */
+.titleRow{
+  display:flex; align-items:flex-end; justify-content:space-between; gap:12px;
+}
+.titleRow h1{margin:0;font-size:28px;line-height:1.15}
+.titleRow .subtitle{color:var(--muted);font-size:13px;max-width:96ch;text-align:right}
+
+/* layout */
+.grid{
+  display:grid; grid-template-columns:1.05fr .95fr; gap:14px; flex:1;
+}
+.panel{
+  background:rgba(255,255,255,.88);
+  border:1px solid var(--border);
+  border-radius:24px;
+  box-shadow:var(--shadow);
+  padding:16px;
+}
+.card{
+  background:#fff;
+  border:1px solid var(--border);
+  border-radius:18px;
+  padding:16px;
+}
+.card h3{
+  margin:0 0 8px;
+  font-size:12px;
+  letter-spacing:.12em;
+  text-transform:uppercase;
+  color:#6a768c;
+}
+.card p{margin:0;font-size:14px;line-height:1.6;color:#111a33}
+
+/* steps */
+.steps{display:grid; gap:12px; margin-top:14px}
+.step{
+  display:grid;
+  grid-template-columns:52px 1fr;
+  gap:12px;
+  padding:14px;
+  border-radius:18px;
+  border:1px solid var(--line);
+  background:linear-gradient(180deg,#ffffff 0%, #fbfcff 100%);
+}
+.n{
+  width:52px;height:52px;border-radius:18px;
+  display:flex;align-items:center;justify-content:center;
+  font-weight:1000;color:#0b1224;
+  background:linear-gradient(135deg, rgba(18,191,167,.22), rgba(11,92,255,.14));
+  border:1px solid rgba(15,23,42,.08);
+}
+.step b{display:block;margin-bottom:4px}
+.step span{display:block;color:#5b667a;font-size:13px;line-height:1.45}
+
+/* Step 4 with thumb */
+.stepRow{
+  display:grid;
+  grid-template-columns: 1fr 210px;
+  gap:12px;
+  align-items:center;
+}
+.thumb{
+  width:100%;
+  height:150px;
+  border:1px solid var(--line);
+  border-radius:16px;
+  background:linear-gradient(180deg,#f8fbff,#eef4ff);
+  padding:10px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  cursor:pointer;
+  position:relative;
+}
+.thumb:after{
+  content:"Zoom";
+  position:absolute;
+  bottom:10px; left:10px;
+  font-size:10px;
+  font-weight:900;
+  letter-spacing:.06em;
+  text-transform:uppercase;
+  background:rgba(255,255,255,.85);
+  border:1px solid rgba(15,23,42,.10);
+  padding:4px 6px;
+  border-radius:999px;
+}
+.thumb img{
+  width:100%;
+  height:100%;
+  object-fit:contain;
+  background:#fff;
+  border-radius:12px;
+}
+
+/* chips */
+.chips{display:flex;flex-wrap:wrap;gap:8px;margin-top:10px}
+.chip{
+  font-size:11px; font-weight:900; letter-spacing:.08em; text-transform:uppercase;
+  padding:6px 10px; border-radius:999px; border:1px solid var(--line);
+  background:#fff; color:#42506a;
+}
+.chip.good{border-color:rgba(22,163,74,.28); background:rgba(22,163,74,.10); color:#14532d}
+.chip.warn{border-color:rgba(245,158,11,.35); background:rgba(245,158,11,.10); color:#7a4a00}
+
+/* boxes */
+.box{
+  margin-top:14px;
+  border:1px solid var(--line);
+  border-radius:20px;
+  padding:14px;
+  background:linear-gradient(180deg,#ffffff 0%, #fbfcff 100%);
+}
+.box h4{
+  margin:0 0 8px;
+  font-size:12px;
+  letter-spacing:.12em;
+  text-transform:uppercase;
+  color:#6a768c;
+}
+.ul{margin:0; padding-left:18px; color:#0f172a; font-size:14px; line-height:1.6}
+.ul li{margin:6px 0}
+.small{color:#5b667a; font-size:13px}
+
+/* note */
+.note{
+  margin-top:14px;
+  padding:14px;
+  border-radius:18px;
+  border:1px dashed rgba(15,23,42,.18);
+  background:rgba(255,255,255,.72);
+  font-size:13px;
+  line-height:1.6;
+}
+.note b{font-weight:1000}
+
+/* modal */
+.modal{
+  position:fixed; inset:0;
+  display:none; align-items:center; justify-content:center;
+  background:rgba(15,23,42,.78);
+  z-index:9999; padding:18px;
+}
+.modal.active{display:flex}
+.modal .frame{
+  width:min(1200px,100%);
+  max-height:92vh;
+  position:relative;
+  border-radius:18px;
+  overflow:hidden;
+  background:#0b1224;
+  box-shadow:0 28px 80px rgba(0,0,0,.35);
+}
+.modal img{
+  width:100%;
+  max-height:92vh;
+  object-fit:contain;
+  background:#0b1224;
+}
+.modal .close{
+  position:absolute;
+  top:10px; right:12px;
+  width:42px; height:42px;
+  border-radius:999px;
+  border:1px solid rgba(255,255,255,.22);
+  background:rgba(255,255,255,.10);
+  color:#fff;
+  font-size:22px;
+  font-weight:1000;
+  cursor:pointer;
+}
+
+/* nav */
+.nav{
+  background:#fff; border:1px solid var(--line); border-radius:22px;
+  padding:14px 16px; display:flex; justify-content:space-between; align-items:center;
+}
+.btn{
+  background:linear-gradient(90deg,#167a5a,#1dbf73);
+  color:#fff; padding:12px 16px; border-radius:999px;
+  font-weight:900; text-decoration:none;
+}
+.btn.secondary{background:#fff;color:#0f172a;border:1px solid var(--line)}
+
+@media(max-width:980px){
+  .grid{grid-template-columns:1fr}
+  .titleRow{flex-direction:column;align-items:flex-start}
+  .titleRow .subtitle{text-align:left}
+  .stepRow{grid-template-columns:1fr}
+  .thumb{height:190px}
+}
+@media(max-width:720px){
+  .nav{flex-direction:column;gap:10px}
+  .btn{width:100%;text-align:center}
+  .titleRow h1{font-size:22px}
+}
+</style>
+</head>
+
+<body>
+<div class="container">
+
+  <!-- header -->
+  <div class="brand">
+    <img class="logo" src="img/AGRM Logo - PNG.png" alt="RateMatch">
+    <img class="plus" src="img/plus.png" alt="+">
+    <img class="logo legend" src="img/legendHotel_Logo-removebg-preview.png" alt="Legend Hotels & Resorts">
+  </div>
+
+  <!-- title -->
+  <div class="titleRow">
+    <h1>Phased rollout approach</h1>
+    <div class="subtitle">
+      Launch property websites first, validate the booking flow, train staff,
+      and then connect the group website with a unified booking calendar.
+    </div>
+  </div>
+
+  <div class="grid">
+    <!-- LEFT -->
+    <div class="panel">
+      <div class="card">
+        <h3>Recommended rollout sequence</h3>
+        <p>
+          This sequence minimizes dependencies and ensures the system is proven
+          before changes are made to the main website.
+        </p>
+
+        <div class="steps">
+          <div class="step">
+            <div class="n">1</div>
+            <div>
+              <b>Create all property websites</b>
+              <span>Each hotel gets a live, bookable property site with direct booking enabled.</span>
+              <div class="chips">
+                <span class="chip good">Independent rollout</span>
+                <span class="chip good">Fast execution</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="step">
+            <div class="n">2</div>
+            <div>
+              <b>Make them live (soft launch)</b>
+              <span>Confirm booking flow, payments, and confirmations are working correctly.</span>
+              <div class="chips">
+                <span class="chip good">Validation first</span>
+                <span class="chip good">Low risk</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="step">
+            <div class="n">3</div>
+            <div>
+              <b>Train staff on the admin panel</b>
+              <span>Short training so reservations and front desk can manage bookings confidently.</span>
+              <div class="chips">
+                <span class="chip good">Simple SOP</span>
+                <span class="chip">15–30 mins</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- UPDATED Step 4 with thumbnail + modal -->
+          <div class="step">
+            <div class="n">4</div>
+            <div class="stepRow">
+              <div>
+                <b>Add booking calendar to the main website</b>
+                <span>
+                  Once property sites are stable, we embed the calendar and CTAs on the Legend group site.
+                  <b>Requires main site access</b> (or coordination with your web/CMS team).
+                </span>
+                <div class="chips">
+                  <span class="chip warn">Requires main site access</span>
+                  <span class="chip good">Unified entry point</span>
+                </div>
+              </div>
+
+              <div class="thumb" role="button" tabindex="0" data-full="img/RateMatch_Calendar.png"
+                   aria-label="Open calendar preview">
+                <img src="img/RateMatch_Calendar.png" alt="RateMatch Calendar preview">
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="note">
+          <b>Main site access:</b> Access to the Legend group website (or CMS) is required
+          to place the booking calendar and booking entry points correctly.
+        </div>
+      </div>
+    </div>
+
+    <!-- RIGHT -->
+    <div class="panel">
+      <div class="card">
+        <h3>Prerequisites for full performance</h3>
+        <p>
+          To enable competitive pricing and parity features, RateMatch relies on active OTA listings.
+        </p>
+
+        <div class="box">
+          <h4>Required</h4>
+          <ul class="ul">
+            <li><b>Each property listed on Booking.com or Agoda</b></li>
+            <li>Listings kept updated with rates and availability</li>
+          </ul>
+          <div class="chips">
+            <span class="chip good">PriceMatch enabled</span>
+            <span class="chip good">Parity confidence</span>
+          </div>
+          <p class="small" style="margin-top:10px">
+            Properties without OTA listings can still go live, but parity comparison
+            and competitive pricing signals will be limited.
+          </p>
+        </div>
+
+        <div class="box">
+          <h4>Operational clarity</h4>
+          <ul class="ul">
+            <li>Existing OTA management processes remain unchanged</li>
+            <li>Manual / walk-in bookings continue as usual</li>
+          </ul>
+        </div>
+
+        <div class="note">
+          <b>Decision point:</b> If some properties are not yet on Booking.com or Agoda,
+          those should be prioritized first to unlock the full value of RateMatch.
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- nav -->
+  <div class="nav">
+    <a class="btn secondary" href="slide10.html">← Previous</a>
+    <strong style="color:#64748b">Slide 11 / 12</strong>
+    <a class="btn" href="slide12.html">Next →</a>
+  </div>
+</div>
+
+<!-- modal -->
+<div class="modal" id="imgModal" aria-hidden="true">
+  <div class="frame" role="dialog" aria-modal="true" aria-label="Calendar preview">
+    <button class="close" id="modalClose" aria-label="Close popup">✕</button>
+    <img id="modalImg" alt="Preview" />
+  </div>
+</div>
+
+<script>
+(function(){
+  const modal = document.getElementById('imgModal');
+  const modalImg = document.getElementById('modalImg');
+  const closeBtn = document.getElementById('modalClose');
+
+  function openModal(src){
+    if(!src) return;
+    modalImg.src = src;
+    modal.classList.add('active');
+    modal.setAttribute('aria-hidden','false');
+    document.body.style.overflow='hidden';
+  }
+  function closeModal(){
+    modal.classList.remove('active');
+    modal.setAttribute('aria-hidden','true');
+    modalImg.src = '';
+    document.body.style.overflow='';
+  }
+
+  document.querySelectorAll('[data-full]').forEach(el=>{
+    el.addEventListener('click', ()=> openModal(el.dataset.full));
+    el.addEventListener('keydown', (e)=>{
+      if(e.key === 'Enter' || e.key === ' ') openModal(el.dataset.full);
+    });
+  });
+
+  closeBtn.addEventListener('click', closeModal);
+  modal.addEventListener('click', (e)=>{ if(e.target === modal) closeModal(); });
+  document.addEventListener('keydown', (e)=>{ if(e.key === 'Escape') closeModal(); });
+})();
+</script>
+
+</body>
+</html>

@@ -1,0 +1,278 @@
+<!-- SLIDE 6 — Price Parity & OTA Comparison (Why guests book direct)
+     Save as: slide6.html
+
+     Put these in /img:
+     - AGRM Logo - PNG.png
+     - plus.png
+     - legendHotel_Logo-removebg-preview.png
+
+     Optional screenshots (update names if different):
+     - RateMatch_Legend_Hotel_Mobile_PriceMatch_1.png
+     - RateMatch_Legend_Hotel_Mobile_PriceMatch_2.png
+-->
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Legend Hotels & Resorts x RateMatch — Slide 6</title>
+
+<style>
+:root{
+  --bg1:#f7f9ff; --bg2:#f3f6ff; --text:#0f172a; --muted:#5b667a;
+  --border:#e5eaf3; --line:#e6ecf6; --accent:#12bfa7; --accent2:#0b5cff;
+  --good:#16a34a; --warn:#f59e0b; --shadow:0 18px 50px rgba(15,23,42,.10);
+}
+*{box-sizing:border-box;font-family:system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif}
+body{
+  margin:0; min-height:100vh; color:var(--text);
+  background:
+    radial-gradient(900px 500px at 12% 10%, rgba(18,191,167,.20) 0%, rgba(18,191,167,0) 55%),
+    radial-gradient(900px 500px at 88% 12%, rgba(11,92,255,.14) 0%, rgba(11,92,255,0) 58%),
+    linear-gradient(180deg, var(--bg1) 0%, var(--bg2) 45%, #f5f7fb 100%);
+}
+img{max-width:100%;display:block}
+
+.container{
+  width:min(1120px, calc(100% - 44px));
+  margin:0 auto; padding:18px 0;
+  min-height:100vh; display:flex; flex-direction:column; gap:14px;
+}
+
+/* header */
+.brand{
+  display:flex; align-items:center; justify-content:center; gap:16px;
+  padding:12px 18px; border-radius:999px;
+  background:rgba(255,255,255,.86); border:1px solid var(--border);
+  box-shadow:0 10px 30px rgba(15,23,42,.08); backdrop-filter: blur(10px);
+}
+.brand img.logo{height:44px}
+.brand img.logo.legend{height:52px}
+.brand img.plus{height:20px;opacity:.9}
+@media(max-width:720px){
+  .brand img.logo{height:34px}
+  .brand img.logo.legend{height:40px}
+}
+
+/* title */
+.titleRow{
+  display:flex; align-items:flex-end; justify-content:space-between; gap:12px;
+}
+.titleRow h1{margin:0;font-size:28px;line-height:1.15}
+.titleRow .subtitle{color:var(--muted);font-size:13px;max-width:72ch;text-align:right}
+
+/* layout */
+.grid{
+  display:grid; grid-template-columns:1.05fr .95fr; gap:14px; flex:1;
+}
+.panel{
+  background:rgba(255,255,255,.88); border:1px solid var(--border);
+  border-radius:24px; box-shadow:var(--shadow); padding:16px;
+}
+.card{
+  background:#fff; border:1px solid var(--border);
+  border-radius:18px; padding:14px;
+}
+.card h3{
+  margin:0 0 8px; font-size:12px; letter-spacing:.12em;
+  text-transform:uppercase; color:#6a768c;
+}
+.card p{margin:0;font-size:14px;line-height:1.6}
+
+/* comparison */
+.compare{
+  display:grid; grid-template-columns:1fr 1fr; gap:10px; margin-top:12px;
+}
+.box{
+  border:1px solid var(--line); border-radius:18px; padding:12px;
+  background:linear-gradient(180deg,#ffffff 0%, #fbfcff 100%);
+}
+.badge{
+  display:inline-block; padding:6px 10px; border-radius:999px;
+  font-size:11px; font-weight:900; letter-spacing:.08em; text-transform:uppercase;
+}
+.badge.ota{background:rgba(245,158,11,.12); border:1px solid rgba(245,158,11,.35); color:#7a4a00}
+.badge.direct{background:rgba(22,163,74,.12); border:1px solid rgba(22,163,74,.35); color:#14532d}
+
+.list{margin:10px 0 0; padding:0; list-style:none; display:grid; gap:8px}
+.list li{font-size:14px; color:#0f172a}
+.list li span{color:#5b667a}
+
+/* thumbs */
+.thumbs{display:grid; gap:10px; margin-top:12px}
+.thumb{
+  height:190px; border:1px solid var(--line); border-radius:18px;
+  background:linear-gradient(180deg,#f8fbff,#eef4ff);
+  padding:10px; display:flex; align-items:center; justify-content:center;
+  cursor:pointer; position:relative;
+}
+.thumb:after{
+  content:"Zoom"; position:absolute; bottom:10px; left:10px;
+  font-size:10px; font-weight:900; letter-spacing:.06em; text-transform:uppercase;
+  background:rgba(255,255,255,.85); border:1px solid rgba(15,23,42,.10);
+  padding:4px 6px; border-radius:999px;
+}
+.thumb img{width:100%;height:100%;object-fit:contain;background:#fff;border-radius:12px}
+
+/* note */
+.note{
+  margin-top:12px; padding:12px; border-radius:18px;
+  border:1px dashed rgba(15,23,42,.18);
+  background:rgba(255,255,255,.72); font-size:13px; line-height:1.55;
+}
+
+/* modal */
+.modal{
+  position:fixed; inset:0; display:none; align-items:center; justify-content:center;
+  background:rgba(15,23,42,.78); z-index:9999; padding:18px;
+}
+.modal.active{display:flex}
+.modal .frame{
+  width:min(1200px,100%); max-height:92vh; position:relative;
+  border-radius:18px; overflow:hidden; background:#0b1224;
+}
+.modal img{width:100%;max-height:92vh;object-fit:contain}
+.modal .close{
+  position:absolute; top:10px; right:12px; width:42px; height:42px;
+  border-radius:999px; border:1px solid rgba(255,255,255,.22);
+  background:rgba(255,255,255,.10); color:#fff; font-size:22px; cursor:pointer;
+}
+
+/* nav */
+.nav{
+  background:#fff; border:1px solid var(--line); border-radius:22px;
+  padding:14px 16px; display:flex; justify-content:space-between; align-items:center;
+}
+.btn{
+  background:linear-gradient(90deg,#167a5a,#1dbf73); color:#fff;
+  padding:12px 16px; border-radius:999px; font-weight:900; text-decoration:none;
+}
+.btn.secondary{background:#fff;color:#0f172a;border:1px solid var(--line)}
+
+@media(max-width:980px){
+  .grid{grid-template-columns:1fr}
+  .titleRow{flex-direction:column;align-items:flex-start}
+  .titleRow .subtitle{text-align:left}
+}
+@media(max-width:720px){
+  .nav{flex-direction:column;gap:10px}
+  .btn{width:100%;text-align:center}
+}
+</style>
+</head>
+
+<body>
+<div class="container">
+
+  <!-- header -->
+  <div class="brand">
+    <img class="logo" src="img/AGRM Logo - PNG.png" alt="RateMatch">
+    <img class="plus" src="img/plus.png" alt="+">
+    <img class="logo legend" src="img/legendHotel_Logo-removebg-preview.png" alt="Legend Hotels & Resorts">
+  </div>
+
+  <!-- title -->
+  <div class="titleRow">
+    <h1>Price parity: why guests choose direct</h1>
+    <div class="subtitle">
+      Guests often assume OTAs are cheaper. RateMatch removes that doubt inside the booking flow.
+    </div>
+  </div>
+
+  <div class="grid">
+    <!-- LEFT -->
+    <div class="panel">
+      <div class="card">
+        <h3>Guest perception today</h3>
+        <p>Without clear parity signals, guests leave your site to “double-check” prices on OTAs.</p>
+
+        <div class="compare">
+          <div class="box">
+            <span class="badge ota">OTA mindset</span>
+            <ul class="list">
+              <li>“Booking.com might be cheaper” <span>→ app switch</span></li>
+              <li>Extra comparisons <span>→ delay</span></li>
+              <li>Higher commission cost <span>→ margin loss</span></li>
+            </ul>
+          </div>
+          <div class="box">
+            <span class="badge direct">With RateMatch</span>
+            <ul class="list">
+              <li>Live price check <span>→ confidence</span></li>
+              <li>Direct value shown <span>→ faster decision</span></li>
+              <li>Booking on your site <span>→ lower cost</span></li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="note">
+          <b>Key insight:</b> Most guests don’t want the cheapest price — they want reassurance.
+          Showing parity early keeps them on your site.
+        </div>
+      </div>
+    </div>
+
+    <!-- RIGHT -->
+    <div class="panel">
+      <div class="card">
+        <h3>How RateMatch shows parity</h3>
+        <p>Price comparison is embedded in the flow — no redirects, no app switching.</p>
+
+        <div class="thumbs">
+          <div class="thumb" role="button" tabindex="0" data-full="img/RateMatch_Legend_Hotel_Mobile_PriceMatch_1.png">
+            <img src="img/RateMatch_Legend_Hotel_Mobile_PriceMatch_1.png" alt="PriceMatch example 1"
+                 onerror="this.parentElement.style.display='none';">
+          </div>
+          <div class="thumb" role="button" tabindex="0" data-full="img/RateMatch_Legend_Hotel_Mobile_PriceMatch_2.png">
+            <img src="img/RateMatch_Legend_Hotel_Mobile_PriceMatch_2.png" alt="PriceMatch example 2"
+                 onerror="this.parentElement.style.display='none';">
+          </div>
+        </div>
+
+        <div class="note">
+          <b>Outcome:</b> Fewer “check later” behaviors, higher completion rate, and stronger trust in
+          Legend’s direct channel.
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- nav -->
+  <div class="nav">
+    <a class="btn secondary" href="slide5.html">← Previous</a>
+    <strong style="color:#64748b">Slide 6 / 12</strong>
+    <a class="btn" href="slide7.html">Next →</a>
+  </div>
+</div>
+
+<!-- modal -->
+<div class="modal" id="imgModal">
+  <div class="frame">
+    <button class="close" id="modalClose">✕</button>
+    <img id="modalImg" alt="Preview">
+  </div>
+</div>
+
+<script>
+(function(){
+  const modal=document.getElementById('imgModal');
+  const modalImg=document.getElementById('modalImg');
+  const close=document.getElementById('modalClose');
+  document.querySelectorAll('[data-full]').forEach(el=>{
+    el.addEventListener('click',()=>{
+      modalImg.src=el.dataset.full;
+      modal.classList.add('active');
+      document.body.style.overflow='hidden';
+    });
+  });
+  close.addEventListener('click',()=>{
+    modal.classList.remove('active');
+    modalImg.src='';
+    document.body.style.overflow='';
+  });
+  modal.addEventListener('click',e=>{if(e.target===modal) close.click()});
+  document.addEventListener('keydown',e=>{if(e.key==='Escape') close.click()});
+})();
+</script>
+</body>
+</html>

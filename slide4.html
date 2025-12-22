@@ -1,0 +1,521 @@
+<!-- SLIDE 4 — Booking Flow Redesign (Images inline with steps + NO empty image space if missing)
+     Save as: slide4.html
+-->
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Legend Hotels & Resorts x RateMatch — Slide 4</title>
+  <style>
+    :root{
+      --bg1:#f7f9ff;
+      --bg2:#f3f6ff;
+      --text:#0f172a;
+      --muted:#5b667a;
+      --border:#e5eaf3;
+      --accent:#12bfa7;
+      --accent2:#0b5cff;
+      --shadow:0 18px 50px rgba(15,23,42,.10);
+      --pill:999px;
+      --line:#e6ecf6;
+    }
+    *{box-sizing:border-box;font-family:system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif}
+    body{
+      margin:0;
+      min-height:100vh;
+      color:var(--text);
+      background:
+        radial-gradient(900px 500px at 12% 10%, rgba(18,191,167,.20) 0%, rgba(18,191,167,0) 55%),
+        radial-gradient(900px 500px at 88% 12%, rgba(11,92,255,.14) 0%, rgba(11,92,255,0) 58%),
+        linear-gradient(180deg, var(--bg1) 0%, var(--bg2) 45%, #f5f7fb 100%);
+    }
+    img{max-width:100%; height:auto; display:block;}
+
+    .container{
+      width:min(1120px, calc(100% - 44px));
+      margin:0 auto;
+      padding:18px 0 18px;
+      min-height:100vh;
+      display:flex;
+      flex-direction:column;
+      gap:14px;
+    }
+
+    /* header pill */
+      .brand{
+    width:100%;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    gap:16px;
+    padding:12px 18px;
+    border-radius:999px;
+    background:rgba(255,255,255,.86);
+    border:1px solid #e5eaf3;
+    box-shadow:0 10px 30px rgba(15,23,42,.08);
+    backdrop-filter: blur(10px);
+  }
+  .brand img.logo{height:44px;width:auto}          /* RateMatch default */
+  .brand img.logo.legend{height:52px;width:auto}   /* Legend slightly larger */
+  .brand img.plus{height:20px;width:auto;opacity:.92}
+
+  @media (max-width: 720px){
+    .brand img.logo{height:34px;}
+    .brand img.logo.legend{height:40px;}           /* still a bit larger on mobile */
+    .brand img.plus{height:18px;}
+  }
+
+    .titleRow{
+      display:flex;
+      align-items:flex-end;
+      justify-content:space-between;
+      gap:12px;
+      margin-top:2px;
+    }
+    .titleRow h1{
+      margin:0;
+      font-size:28px;
+      line-height:1.15;
+      letter-spacing:.01em;
+      color:#0b1224;
+    }
+    .titleRow .subtitle{
+      color:var(--muted);
+      font-size:13px;
+      line-height:1.4;
+      max-width:78ch;
+      text-align:right;
+    }
+
+    .grid{
+      display:grid;
+      grid-template-columns: 1fr 1fr;
+      gap:14px;
+      flex:1;
+      align-items:stretch;
+    }
+
+    .panel{
+      background:rgba(255,255,255,.88);
+      border:1px solid var(--border);
+      border-radius:24px;
+      box-shadow:var(--shadow);
+      backdrop-filter: blur(10px);
+      padding:16px;
+    }
+
+    .card{
+      background:#fff;
+      border:1px solid var(--border);
+      border-radius:18px;
+      padding:14px;
+    }
+    .card h3{
+      margin:0 0 8px;
+      font-size:12px;
+      letter-spacing:.12em;
+      text-transform:uppercase;
+      color:#6a768c;
+    }
+    .card p{
+      margin:0;
+      font-size:14px;
+      line-height:1.6;
+      color:#111a33;
+    }
+
+    /* steps (default has image column) */
+    .steps{display:grid;gap:10px;margin-top:12px}
+    .step{
+      display:grid;
+      grid-template-columns: 74px 1fr 220px; /* num | text | image */
+      gap:12px;
+      align-items:center;
+      padding:12px;
+      border-radius:18px;
+      border:1px solid var(--line);
+      background:linear-gradient(180deg,#ffffff 0%, #fbfcff 100%);
+    }
+
+    /* ✅ if a step has no image, add class "noMedia" to remove the empty column */
+    .step.noMedia{
+      grid-template-columns: 74px 1fr;  /* num | text */
+    }
+
+    .num{
+      width:74px;height:74px;border-radius:20px;
+      display:flex;align-items:center;justify-content:center;
+      font-weight:1000;
+      font-size:22px;
+      color:#0b1224;
+      background:linear-gradient(135deg, rgba(18,191,167,.22), rgba(11,92,255,.14));
+      border:1px solid rgba(15,23,42,.08);
+    }
+    .txt b{display:block;margin-bottom:4px}
+    .txt span{display:block;color:#5b667a;font-size:13px;line-height:1.45}
+    .chips{display:flex;flex-wrap:wrap;gap:8px;margin-top:8px}
+    .chip{
+      font-size:11px;
+      font-weight:900;
+      letter-spacing:.08em;
+      text-transform:uppercase;
+      padding:6px 10px;
+      border-radius:999px;
+      border:1px solid var(--line);
+      background:#fff;
+      color:#42506a;
+    }
+    .chip.warn{border-color:rgba(245,158,11,.35); background:rgba(245,158,11,.10); color:#7a4a00;}
+    .chip.good{border-color:rgba(22,163,74,.28); background:rgba(22,163,74,.10); color:#14532d;}
+
+    .thumb{
+      height:132px;
+      border-radius:16px;
+      border:1px solid var(--line);
+      overflow:hidden;
+      background:linear-gradient(180deg,#f8fbff,#eef4ff);
+      padding:8px;
+      cursor:pointer;
+      position:relative;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+    }
+    .thumb:after{
+      content:"Zoom";
+      position:absolute;
+      bottom:8px; left:8px;
+      font-size:10px;
+      color:#0f172a;
+      background:rgba(255,255,255,.85);
+      border:1px solid rgba(15,23,42,.10);
+      padding:4px 6px;
+      border-radius:999px;
+      font-weight:900;
+      letter-spacing:.06em;
+      text-transform:uppercase;
+    }
+    .thumb img{
+      width:100%;
+      height:100%;
+      object-fit:contain;
+      object-position:center;
+      background:#fff;
+      border-radius:10px;
+    }
+
+    .why{
+      margin-top:12px;
+      padding:12px;
+      border-radius:18px;
+      border:1px dashed rgba(15,23,42,.18);
+      background:rgba(255,255,255,.72);
+      font-size:13px;
+      line-height:1.55;
+      color:#0f172a;
+    }
+    .why b{font-weight:1000}
+
+    /* modal */
+    .modal{
+      position:fixed;
+      inset:0;
+      display:none;
+      align-items:center;
+      justify-content:center;
+      background:rgba(15,23,42,.78);
+      z-index:9999;
+      padding:18px;
+    }
+    .modal.active{display:flex;}
+    .modal .frame{
+      width:min(1200px, 100%);
+      max-height:92vh;
+      position:relative;
+      border-radius:18px;
+      overflow:hidden;
+      background:#0b1224;
+      border:1px solid rgba(255,255,255,.12);
+      box-shadow:0 28px 80px rgba(0,0,0,.35);
+    }
+    .modal img{
+      width:100%;
+      height:auto;
+      max-height:92vh;
+      object-fit:contain;
+      background:#0b1224;
+    }
+    .modal .close{
+      position:absolute;
+      top:10px;
+      right:12px;
+      width:42px;height:42px;
+      border-radius:999px;
+      border:1px solid rgba(255,255,255,.22);
+      background:rgba(255,255,255,.10);
+      color:#fff;
+      font-size:22px;
+      font-weight:1000;
+      cursor:pointer;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      backdrop-filter: blur(8px);
+    }
+    .modal .hint{
+      position:absolute;
+      left:12px;
+      top:12px;
+      font-size:12px;
+      color:rgba(255,255,255,.88);
+      background:rgba(255,255,255,.10);
+      border:1px solid rgba(255,255,255,.18);
+      padding:8px 10px;
+      border-radius:999px;
+      font-weight:800;
+      letter-spacing:.08em;
+      text-transform:uppercase;
+      backdrop-filter: blur(8px);
+    }
+
+    /* nav */
+    .nav{
+      background:#fff;
+      border:1px solid var(--line);
+      border-radius:22px;
+      padding:14px 16px;
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      gap:10px;
+    }
+    .btn{
+      appearance:none;
+      border:0;
+      background:linear-gradient(90deg, #167a5a, #1dbf73);
+      color:#fff;
+      padding:12px 16px;
+      border-radius:999px;
+      font-weight:900;
+      cursor:pointer;
+      text-decoration:none;
+      display:inline-flex;
+      align-items:center;
+      gap:8px;
+      white-space:nowrap;
+      box-shadow:0 12px 26px rgba(16,185,129,.25);
+    }
+    .btn.secondary{
+      background:#ffffff;
+      color:#0f172a;
+      border:1px solid var(--line);
+      box-shadow:none;
+    }
+
+    @media (max-width: 1020px){
+      .grid{grid-template-columns:1fr;}
+      .titleRow{flex-direction:column; align-items:flex-start;}
+      .titleRow .subtitle{text-align:left; max-width:none;}
+    }
+    @media (max-width: 860px){
+      .step{grid-template-columns:64px 1fr; grid-template-rows:auto auto; align-items:start;}
+      .thumb{grid-column:1 / -1; height:220px;}
+      .num{width:64px;height:64px;border-radius:18px;font-size:20px}
+      .step.noMedia{grid-template-columns:64px 1fr;}
+    }
+    @media (max-width: 720px){
+      .container{width:min(1120px, calc(100% - 28px));}
+      .brand img.logo{height:32px;}
+      .brand img.plus{height:18px;}
+      .titleRow h1{font-size:22px;}
+      .nav{flex-direction:column; align-items:stretch;}
+      .btn{width:100%; justify-content:center;}
+    }
+  </style>
+</head>
+
+<body>
+  <div class="container">
+<div class="brand">
+  <img class="logo" src="img/AGRM Logo - PNG.png" alt="RateMatch" />
+  <img class="plus" src="img/plus.png" alt="+" />
+  <img class="logo legend" src="img/legendHotel_Logo-removebg-preview.png" alt="Legend Hotels & Resorts" />
+</div>
+
+    <div class="titleRow">
+      <h1>Booking flow redesign: from “fragmented” to “guided”</h1>
+      <div class="subtitle">Images are mapped to each step so stakeholders can see exactly where friction is removed.</div>
+    </div>
+
+    <div class="grid">
+      <!-- Current journey -->
+      <div class="panel">
+        <div class="card">
+          <h3>Current journey (today)</h3>
+          <p>Multiple hops + a different booking UI. Each hop creates drop-offs and reduces trust.</p>
+
+          <div class="steps">
+            <div class="step">
+              <div class="num">1</div>
+              <div class="txt">
+                <b>Group website → find the right property</b>
+                <span>Rates/availability are not visible early, so many guests bounce before intent is formed.</span>
+                <div class="chips">
+                  <span class="chip warn">Extra clicks</span>
+                  <span class="chip warn">Lost context</span>
+                  <span class="chip warn">Mobile drop-offs</span>
+                </div>
+              </div>
+              <div class="thumb" role="button" tabindex="0" data-full="img/legend hotel homepage.png" aria-label="Open Step 1 screenshot">
+                <img src="img/legend hotel homepage.png" alt="Step 1 screenshot">
+              </div>
+            </div>
+
+            <div class="step">
+              <div class="num">2</div>
+              <div class="txt">
+                <b>Property page → reach booking CTA</b>
+                <span>More scrolling and less persistent CTAs. Guests can lose the “next action”.</span>
+                <div class="chips">
+                  <span class="chip warn">Scroll heavy</span>
+                  <span class="chip warn">CTA visibility</span>
+                </div>
+              </div>
+              <div class="thumb" role="button" tabindex="0" data-full="img/legend_hotel_pk property_page.png" aria-label="Open Step 2 screenshot">
+                <img src="img/legend_hotel_pk property_page.png" alt="Step 2 screenshot">
+              </div>
+            </div>
+
+            <div class="step">
+              <div class="num">3</div>
+              <div class="txt">
+                <b>Booking subdomain → different UI</b>
+                <span>Branding breaks + limited localization can reduce trust and completion rate.</span>
+                <div class="chips">
+                  <span class="chip warn">UI mismatch</span>
+                  <span class="chip warn">Localization gaps</span>
+                </div>
+              </div>
+              <div class="thumb" role="button" tabindex="0" data-full="img/Legend Hotel Bookin Form step 1.png" aria-label="Open Step 3 screenshot">
+                <img src="img/Legend Hotel Bookin Form step 1.png" alt="Step 3 screenshot">
+              </div>
+            </div>
+          </div>
+
+          <div class="why">
+            <b>Problem:</b> the user experience is not “guided”. When rates are unclear or availability is low,
+            there is no strong path to keep guests moving toward a confirmed booking.
+          </div>
+        </div>
+      </div>
+
+      <!-- RateMatch journey -->
+      <div class="panel">
+        <div class="card">
+          <h3>RateMatch journey (proposed)</h3>
+          <p>Show dates early, build trust, and keep guests on a single, mobile-first flow.</p>
+
+          <div class="steps">
+            <div class="step">
+              <div class="num">1</div>
+              <div class="txt">
+                <b>Mobile calendar (availability early)</b>
+                <span>Guests immediately see dates and availability in a clean, fast interface.</span>
+                <div class="chips">
+                  <span class="chip good">Fewer steps</span>
+                  <span class="chip good">Clear CTAs</span>
+                </div>
+              </div>
+              <div class="thumb" role="button" tabindex="0" data-full="img/RateMatch_Legend_Hotel_Mobile_Calendar.png" aria-label="Open calendar screenshot">
+                <img src="img/RateMatch_Legend_Hotel_Mobile_Calendar.png" alt="RateMatch calendar screenshot">
+              </div>
+            </div>
+
+            <div class="step">
+              <div class="num">2</div>
+              <div class="txt">
+                <b>PriceMatch (parity confidence)</b>
+                <span>Built-in price checker reduces “OTA is cheaper” doubts and helps conversion.</span>
+                <div class="chips">
+                  <span class="chip good">Trust signal</span>
+                  <span class="chip good">Lower drop-offs</span>
+                </div>
+              </div>
+              <div class="thumb" role="button" tabindex="0" data-full="img/RateMatch_Legend_Hotel_Mobile_PriceMatch_2.png" aria-label="Open PriceMatch screenshot">
+                <img src="img/RateMatch_Legend_Hotel_Mobile_PriceMatch_2.png" alt="PriceMatch screenshot">
+              </div>
+            </div>
+
+            <!-- ✅ no image → no empty column -->
+            <div class="step noMedia">
+              <div class="num">3</div>
+              <div class="txt">
+                <b>Checkout with secure payments</b>
+                <span>Secure online payments (Stripe, PayPal, Ottu), Fully-PCI Compliant.</span>
+                <div class="chips">
+                  <span class="chip good">Faster checkout</span>
+                  <span class="chip good">Higher completion</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="why">
+            <b>Impact:</b> fewer hops + better localization + visible parity tools = higher conversion and
+            better “book direct” confidence.
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="nav">
+      <a class="btn secondary" href="slide3.html">← Previous</a>
+      <div style="font-weight:900;color:#64748b;">Slide 4 / 12</div>
+      <a class="btn" href="slide5.html">Next →</a>
+    </div>
+  </div>
+
+  <!-- Popup Modal -->
+  <div class="modal" id="imgModal" aria-hidden="true">
+    <div class="frame" role="dialog" aria-modal="true" aria-label="Screenshot preview">
+      <div class="hint">Click outside or press Esc</div>
+      <button class="close" id="modalClose" aria-label="Close popup">✕</button>
+      <img id="modalImg" alt="Preview" />
+    </div>
+  </div>
+
+  <script>
+    (function(){
+      const modal = document.getElementById('imgModal');
+      const modalImg = document.getElementById('modalImg');
+      const closeBtn = document.getElementById('modalClose');
+
+      function openModal(src){
+        if(!src) return;
+        modalImg.src = src;
+        modal.classList.add('active');
+        modal.setAttribute('aria-hidden', 'false');
+        document.body.style.overflow = 'hidden';
+      }
+      function closeModal(){
+        modal.classList.remove('active');
+        modal.setAttribute('aria-hidden', 'true');
+        modalImg.src = '';
+        document.body.style.overflow = '';
+      }
+
+      document.querySelectorAll('[data-full]').forEach(el=>{
+        el.addEventListener('click', ()=> openModal(el.dataset.full));
+        el.addEventListener('keydown', (e)=>{
+          if(e.key === 'Enter' || e.key === ' ') openModal(el.dataset.full);
+        });
+      });
+
+      closeBtn.addEventListener('click', closeModal);
+      modal.addEventListener('click', (e)=>{ if(e.target === modal) closeModal(); });
+      document.addEventListener('keydown', (e)=>{ if(e.key === 'Escape') closeModal(); });
+    })();
+  </script>
+</body>
+</html>
